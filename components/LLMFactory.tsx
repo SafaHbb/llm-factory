@@ -2,7 +2,7 @@
 
 import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { buildPipeline, EXAMPLES, withGeneration, type Pipeline, type RawStep } from "@/lib/pipeline";
+import { buildPipeline, DEFAULT_TEXT, withGeneration, type Pipeline, type RawStep } from "@/lib/pipeline";
 import { STAGES, stageDuration } from "@/lib/stages";
 import { cn } from "@/lib/cn";
 import { EASE } from "@/lib/motion";
@@ -22,8 +22,8 @@ interface ModelStatus {
 }
 
 export default function LLMFactory() {
-  const [draft, setDraft] = useState(EXAMPLES[0]);
-  const [pipeline, setPipeline] = useState(() => buildPipeline(EXAMPLES[0]));
+  const [draft, setDraft] = useState(DEFAULT_TEXT);
+  const [pipeline, setPipeline] = useState(() => buildPipeline(DEFAULT_TEXT));
   const [runId, setRunId] = useState(0);
   const [stage, setStage] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -53,7 +53,7 @@ export default function LLMFactory() {
       .then((r) => r.json())
       .then((d: { ok: boolean; model: string; error?: string }) => {
         setModel(d.ok ? { state: "ready", model: d.model } : { state: "offline", model: d.model, error: d.error });
-        if (d.ok) generate(buildPipeline(EXAMPLES[0]));
+        if (d.ok) generate(buildPipeline(DEFAULT_TEXT));
       })
       .catch(() => setModel({ state: "offline", error: "API route unavailable" }));
   }, [generate]);
@@ -128,7 +128,7 @@ export default function LLMFactory() {
             <span className="text-[15px] font-semibold tracking-tight text-ink">LLM Factory</span>
             <ModelPill status={model} />
           </div>
-          <InputBar value={draft} current={pipeline.input} onChange={setDraft} onRun={run} />
+          <InputBar value={draft} onChange={setDraft} onRun={run} />
         </header>
 
         <StageRail stage={stage} onSelect={go} />
@@ -183,14 +183,10 @@ export default function LLMFactory() {
 function ModelPill({ status }: { status: ModelStatus }) {
   const { state, model, real, error } = status;
   const name = model?.replace(/:latest$/, "") ?? "model";
-  const label =
-    state === "checking" ? "connecting to Ollama…"
-    : state === "thinking" ? `${name} is writing…`
-    : state === "ready" ? (real === false ? `${name} · live text, simulated scores` : `${name} · live`)
-    : "simulated (Ollama offline)";
+  const label = state === "offline" ? "Ollama offline" : "Ollama";
   return (
     <span
-      title={state === "offline" ? error : undefined}
+      title={state === "offline" ? error : `${name}${state === "thinking" ? " is writing…" : real === false ? " · simulated scores" : ""}`}
       className="flex items-center gap-1.5 rounded-full border border-line bg-white px-2.5 py-1 text-[11px] text-muted"
     >
       <span

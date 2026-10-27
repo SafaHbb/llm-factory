@@ -8,7 +8,7 @@ import { ContextChip, GenChip } from "./chips";
 import { CandidateBars, Connector, Ghost, ModelBox } from "./ModelParts";
 
 // read -> think -> score -> pick
-const PHASE_AT = [900, 1700, 3100];
+const PHASE_AT = [500, 1000, 1900];
 
 export function PredictionStage({ pipeline }: { pipeline: Pipeline }) {
   const cands = pipeline.generated[0]?.candidates.slice(0, 4) ?? [];

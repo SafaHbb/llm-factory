@@ -1,16 +1,14 @@
 "use client";
 
-import { EXAMPLES, MAX_CHARS } from "@/lib/pipeline";
-import { cn } from "@/lib/cn";
+import { MAX_CHARS } from "@/lib/pipeline";
 
 interface Props {
   value: string;
-  current: string;
   onChange: (v: string) => void;
   onRun: (v: string) => void;
 }
 
-export function InputBar({ value, current, onChange, onRun }: Props) {
+export function InputBar({ value, onChange, onRun }: Props) {
   return (
     <div className="flex w-full flex-col gap-2 lg:w-auto lg:items-end">
       <form
@@ -34,20 +32,6 @@ export function InputBar({ value, current, onChange, onRun }: Props) {
           Run
         </button>
       </form>
-      <div className="flex flex-wrap items-center gap-1.5 lg:justify-end">
-        {EXAMPLES.map((ex) => (
-          <button
-            key={ex}
-            onClick={() => { onChange(ex); onRun(ex); }}
-            className={cn(
-              "rounded-full border px-2.5 py-1 text-[11px] transition",
-              ex === current ? "border-ink bg-ink text-white" : "border-line bg-white text-ink/80 hover:border-ink/30",
-            )}
-          >
-            {ex}
-          </button>
-        ))}
-      </div>
     </div>
   );
 }

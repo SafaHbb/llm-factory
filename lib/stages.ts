@@ -17,13 +17,13 @@ export const STAGES: StageInfo[] = [
   { short: "Output", title: "Output", line: "Tokens are joined back into text." },
 ];
 
-export const GEN_STEP_MS = 1100;
+export const GEN_STEP_MS = 750;
 
-/** Time per generated token; long continuations play faster so the stage stays under ~14s. */
-export const genStepMs = (count: number) => Math.round(Math.max(600, Math.min(GEN_STEP_MS, 13000 / Math.max(1, count))));
+/** Time per generated token; long continuations play faster so the stage stays under ~9s. */
+export const genStepMs = (count: number) => Math.round(Math.max(450, Math.min(GEN_STEP_MS, 9000 / Math.max(1, count))));
 
 export function stageDuration(stage: number, genCount: number, tokenCount = 8): number {
-  const base = [3000, 3000, 3600, 3400, 4200, 1600 + tokenCount * 250 + 1400, 5600, 5800, 0, 5000];
-  if (stage === 8) return 1000 + genCount * genStepMs(genCount) + 1600;
+  const base = [2000, 2000, 2400, 2300, 2800, 1000 + tokenCount * 150 + 1000, 4000, 3800, 0, 3500];
+  if (stage === 8) return 600 + genCount * genStepMs(genCount) + 1000;
   return base[stage] ?? 4000;
 }

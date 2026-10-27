@@ -54,12 +54,7 @@ export const MAX_TOKENS = 16;
 export const MAX_CHARS = 60;
 export const VOCAB_SIZE = 50257;
 
-export const EXAMPLES = [
-  "The cat sat on the mat.",
-  "I love learning new things.",
-  "Robots dream of electric sheep.",
-  "Tokenization is surprisingly simple.",
-];
+export const DEFAULT_TEXT = "The cat sat on the mat.";
 
 /* ---------- helpers ---------- */
 

@@ -20,7 +20,7 @@ export function GenerationStage({ pipeline }: { pipeline: Pipeline }) {
 
   useEffect(() => {
     if (count >= n) return;
-    const lead = count === 1 ? 700 : 0;
+    const lead = count === 1 ? 400 : 0;
     const a = setTimeout(() => setPicked(true), lead + stepMs * PICK_AT);
     const b = setTimeout(() => { setPicked(false); setCount((c) => c + 1); }, lead + stepMs);
     return () => { clearTimeout(a); clearTimeout(b); };

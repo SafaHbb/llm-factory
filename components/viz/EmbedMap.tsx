@@ -136,7 +136,7 @@ export function EmbedMap({ pipeline, stage }: { pipeline: Pipeline; stage: numbe
               vectorEffect="non-scaling-stroke"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}
-              transition={{ delay: 0.4, duration: 0.25 * placed.length + 0.4, ease: "easeInOut" }}
+              transition={{ delay: 0.25, duration: 0.15 * placed.length + 0.3, ease: "easeInOut" }}
             />
           </motion.svg>
         )}
@@ -168,7 +168,7 @@ export function EmbedMap({ pipeline, stage }: { pipeline: Pipeline; stage: numbe
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0, opacity: 0 }}
-                  transition={{ delay: 0.45 + t.index * 0.25, duration: 0.35, ease: EASE }}
+                  transition={{ delay: 0.3 + t.index * 0.15, duration: 0.3, ease: EASE }}
                   className="absolute -left-2.5 -top-2.5 grid h-5 min-w-5 place-items-center rounded-full bg-steel px-1 font-mono text-[10px] font-medium text-white"
                 >
                   {t.index + 1}

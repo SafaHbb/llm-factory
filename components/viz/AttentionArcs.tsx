@@ -37,7 +37,7 @@ export function AttentionArcs({ containerRef, tokenRefs, count, focus, weights }
   }, [containerRef, tokenRefs, count]);
 
   useEffect(() => {
-    const t = setTimeout(() => { ready.current = true; measure(); }, 900);
+    const t = setTimeout(() => { ready.current = true; measure(); }, 650);
     const ro = new ResizeObserver(() => { if (ready.current) measure(); });
     if (containerRef.current) ro.observe(containerRef.current);
     const onResize = () => ready.current && measure();
