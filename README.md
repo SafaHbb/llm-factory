@@ -4,11 +4,7 @@ A visual, step-by-step tour of how a language model turns a sentence into new te
 
 ## Demo
 
-
-
-https://github.com/user-attachments/assets/9dc77250-7558-4299-8704-6d43ed7f23c2
-
-
+Uploading LLM_Factory.mp4…
 
 ## Run
 
