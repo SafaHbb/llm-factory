@@ -38,7 +38,7 @@ export function GenerationStage({ pipeline }: { pipeline: Pipeline }) {
         ))}
         {!done && (
           <motion.span
-            className="mx-1 h-6 w-[2px] rounded-full bg-accent"
+            className="mx-1 h-6 w-[3px] rounded-full bg-coral"
             animate={{ opacity: [1, 0, 1] }}
             transition={{ duration: 0.9, repeat: Infinity }}
           />
@@ -73,8 +73,8 @@ export function GenerationStage({ pipeline }: { pipeline: Pipeline }) {
         {gen.map((_, k) => (
           <motion.span
             key={k}
-            className="h-1.5 w-6 rounded-full"
-            animate={{ backgroundColor: k < count ? COLORS.accent : COLORS.line }}
+            className="h-2.5 w-6 rounded-full border-2 border-ink"
+            animate={{ backgroundColor: k < count ? COLORS.coral : COLORS.white }}
             transition={{ duration: 0.4 }}
           />
         ))}

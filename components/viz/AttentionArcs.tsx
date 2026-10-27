@@ -68,16 +68,16 @@ export function AttentionArcs({ containerRef, tokenRefs, count, focus, weights }
             <motion.path
               d={d}
               fill="none"
-              stroke={COLORS.steel}
+              stroke={COLORS.ink}
               strokeLinecap="round"
-              strokeWidth={1 + rel * 6}
-              strokeOpacity={0.2 + rel * 0.7}
+              strokeWidth={1.5 + rel * 5.5}
+              strokeOpacity={0.3 + rel * 0.7}
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}
               transition={{ duration: 0.9, delay: 0.04 * k, ease: EASE }}
             />
             {strongest.includes(j) && (
-              <circle r={2.2 + rel * 1.6} fill={COLORS.steel}>
+              <circle r={3.5 + rel * 1.5} fill={COLORS.sun} stroke={COLORS.ink} strokeWidth={1.5}>
                 <animateMotion
                   dur={`${1.5 + k * 0.08}s`}
                   repeatCount="indefinite"
@@ -91,10 +91,10 @@ export function AttentionArcs({ containerRef, tokenRefs, count, focus, weights }
             <motion.circle
               cx={p.x}
               cy={p.y - 4}
-              r={2.5}
-              fill={COLORS.steel}
+              r={3}
+              fill={COLORS.ink}
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.3 + rel * 0.7 }}
+              animate={{ opacity: 0.4 + rel * 0.6 }}
               transition={{ delay: 0.6 + 0.04 * k }}
             />
           </g>
@@ -104,9 +104,11 @@ export function AttentionArcs({ containerRef, tokenRefs, count, focus, weights }
         key={`f-${focus}`}
         cx={f.x}
         cy={f.y - 4}
-        fill={COLORS.steel}
+        fill={COLORS.coral}
+        stroke={COLORS.ink}
+        strokeWidth={2}
         initial={{ r: 0 }}
-        animate={{ r: 4.5 }}
+        animate={{ r: 6 }}
         transition={{ duration: 0.4, ease: EASE }}
       />
     </svg>

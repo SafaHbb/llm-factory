@@ -3,33 +3,41 @@
 @tailwind utilities;
 
 html {
-  background: #f5f4f0;
-  color: #1c1b19;
+  background: #f4f2ee;
+  color: #1a1a1a;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 body {
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  font-feature-settings: "cv11", "ss01";
+  font-family: var(--font-body), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 ::selection {
-  background: #fbede4;
-  color: #1c1b19;
+  background: #ffd84d;
+  color: #1a1a1a;
+}
+
+/* Big outlined display titles: coloured fill, ink outline, hard shadow. */
+.display-title {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 400;
+  -webkit-text-stroke: 3px #1a1a1a;
+  paint-order: stroke fill;
+  text-shadow: 6px 6px 0 #1a1a1a;
 }
 
 .canvas-grid {
-  background-image: radial-gradient(rgba(28, 27, 25, 0.09) 1px, transparent 1px);
-  background-size: 20px 20px;
+  background-image: radial-gradient(rgba(26, 26, 26, 0.13) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
   background-position: center;
 }
 
 .belt {
   background-image: repeating-linear-gradient(
     90deg,
-    rgba(28, 27, 25, 0.16) 0 2px,
-    transparent 2px 14px
+    #1a1a1a 0 3px,
+    transparent 3px 14px
   );
 }
 

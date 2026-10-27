@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 230" fill="none" stroke-linecap="round">
+<g transform="translate(8 8)" stroke="#1A1A1A"><path d="M0.0 40.0 A150 150 0 0 1 147.7 216.0" stroke-width="27"/><path d="M0.0 66.0 A124 124 0 0 1 122.1 211.5" stroke-width="27"/><path d="M0.0 92.0 A98 98 0 0 1 96.5 207.0" stroke-width="27"/></g>
+<path d="M0.0 40.0 A150 150 0 0 1 147.7 216.0" stroke="#1A1A1A" stroke-width="27"/>
+<path d="M0.0 40.0 A150 150 0 0 1 147.7 216.0" stroke="#9EE493" stroke-width="17"/>
+<path d="M0.0 40.0 A150 150 0 0 1 147.7 216.0" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="3" transform="translate(-2 -2)"/>
+<path d="M0.0 66.0 A124 124 0 0 1 122.1 211.5" stroke="#1A1A1A" stroke-width="27"/>
+<path d="M0.0 66.0 A124 124 0 0 1 122.1 211.5" stroke="#FFD84D" stroke-width="17"/>
+<path d="M0.0 66.0 A124 124 0 0 1 122.1 211.5" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="3" transform="translate(-2 -2)"/>
+<path d="M0.0 92.0 A98 98 0 0 1 96.5 207.0" stroke="#1A1A1A" stroke-width="27"/>
+<path d="M0.0 92.0 A98 98 0 0 1 96.5 207.0" stroke="#F7A8D8" stroke-width="17"/>
+<path d="M0.0 92.0 A98 98 0 0 1 96.5 207.0" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="3" transform="translate(-2 -2)"/>
+</svg>

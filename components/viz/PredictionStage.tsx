@@ -30,7 +30,7 @@ export function PredictionStage({ pipeline }: { pipeline: Pipeline }) {
           <GenChip k={0} text={top.text} />
         ) : (
           <motion.div
-            className="grid h-[30px] min-w-[44px] place-items-center rounded-[10px] border border-dashed border-accent bg-accent-soft/60 px-2 font-mono text-sm text-accent"
+            className="grid h-[31px] min-w-[44px] place-items-center rounded-[12px] border-[2.5px] border-dashed border-ink bg-cream px-2 font-mono text-sm font-bold text-ink"
             animate={{ opacity: [0.45, 1, 0.45] }}
             transition={{ duration: 1.4, repeat: Infinity }}
           >
@@ -65,12 +65,12 @@ export function PredictionStage({ pipeline }: { pipeline: Pipeline }) {
       </motion.div>
 
       <motion.p
-        className="mt-4 flex items-center gap-2 text-[11px] text-ink"
+        className="mt-2 flex items-center gap-2 text-[11px] text-ink"
         initial={{ opacity: 0, y: 4 }}
         animate={{ opacity: picked ? 1 : 0, y: picked ? 0 : 4 }}
         transition={{ duration: 0.35 }}
       >
-        <span className="grid h-4 w-4 place-items-center rounded-full bg-accent font-mono text-[9px] font-medium text-white">3</span>
+        <span className="grid h-[18px] w-[18px] place-items-center rounded-full border-2 border-ink bg-coral font-mono text-[9px] font-bold text-ink">3</span>
         the highest score wins and fills the blank
       </motion.p>
     </div>

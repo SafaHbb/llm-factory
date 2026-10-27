@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
+import { Lato, Lilita_One, Space_Mono } from "next/font/google";
 import "./globals.css";
+
+const display = Lilita_One({ weight: "400", subsets: ["latin"], variable: "--font-display", display: "swap" });
+const body = Lato({ weight: ["400", "700"], subsets: ["latin"], variable: "--font-body", display: "swap" });
+const mono = Space_Mono({ weight: ["400", "700"], subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
 export const metadata: Metadata = {
   title: "LLM Factory",
@@ -8,15 +13,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-        />
-      </head>
+    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
       <body>{children}</body>
     </html>
   );

@@ -4,15 +4,16 @@ import { motion } from "framer-motion";
 import { STAGES } from "@/lib/stages";
 import { cn } from "@/lib/cn";
 import { EASE } from "@/lib/motion";
+import { Deco } from "./Deco";
 
 export function StageRail({ stage, onSelect }: { stage: number; onSelect: (i: number) => void }) {
   const last = STAGES.length - 1;
   return (
-    <nav aria-label="Pipeline stages" className="-mx-4 overflow-x-auto px-4 pb-0.5 sm:mx-0 sm:px-0">
+    <nav aria-label="Pipeline stages" className="-mx-4 shrink-0 overflow-x-auto px-4 pb-0.5 pt-2 sm:mx-0 sm:px-0">
       <ol className="relative grid min-w-[720px] grid-cols-10">
-        <div className="absolute left-[5%] right-[5%] top-[13px] h-px bg-line" />
+        <div className="absolute left-[5%] right-[5%] top-[15px] h-[3px] rounded-full bg-ink/15" />
         <motion.div
-          className="absolute left-[5%] top-[13px] h-px w-[90%] origin-left bg-ink"
+          className="absolute left-[5%] top-[15px] h-[3px] w-[90%] origin-left rounded-full bg-ink"
           initial={false}
           animate={{ scaleX: stage / last }}
           transition={{ duration: 0.8, ease: EASE }}
@@ -24,26 +25,34 @@ export function StageRail({ stage, onSelect }: { stage: number; onSelect: (i: nu
             <li key={s.short} className="relative flex justify-center">
               <button
                 onClick={() => onSelect(i)}
-                className="group flex flex-col items-center gap-2 rounded-lg px-1 py-0.5 outline-none focus-visible:ring-2 focus-visible:ring-steel/40"
+                className="group flex flex-col items-center gap-1 rounded-lg px-1 py-0.5 outline-none focus-visible:ring-[3px] focus-visible:ring-sky"
                 aria-current={active ? "step" : undefined}
               >
-                <span
+                <motion.span
+                  initial={false}
+                  animate={{ scale: active ? 1.18 : 1 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 18 }}
                   className={cn(
-                    "relative grid h-[27px] w-[27px] place-items-center rounded-full border font-mono text-[10px] transition-colors",
-                    active ? "border-ink text-white" : passed ? "border-ink bg-ink text-white" : "border-line bg-paper text-muted group-hover:border-ink/40",
+                    "relative grid h-[33px] w-[33px] place-items-center rounded-full border-[2.5px] border-ink font-mono text-[11px] font-bold transition-colors",
+                    active ? "bg-coral text-ink shadow-hard-sm" : passed ? "bg-ink text-white" : "bg-white text-ink group-hover:bg-sun",
                   )}
                 >
+                  {String(i + 1).padStart(2, "0")}
+                  {/* remounts in the new circle on every stage change, so it pops */}
+                  {active && <Deco name="sparkle" width={17} pop idle="none" className="-right-[11px] -top-[11px]" />}
+                </motion.span>
+                <span className={cn("flex items-center gap-1 text-xs leading-none text-ink", active ? "font-bold" : "group-hover:underline")}>
                   {active && (
                     <motion.span
                       layoutId="rail-active"
-                      className="absolute -inset-[5px] rounded-full border border-accent/50"
+                      aria-hidden="true"
+                      className="pointer-events-none block"
                       transition={{ duration: 0.6, ease: EASE }}
-                    />
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src="/illustrations/dot-coral.svg" alt="" width={9} height={9} className="block" />
+                    </motion.span>
                   )}
-                  {active && <span className="absolute inset-0 rounded-full bg-accent" />}
-                  <span className="relative">{String(i + 1).padStart(2, "0")}</span>
-                </span>
-                <span className={cn("text-xs transition-colors", active ? "font-medium text-ink" : "text-muted group-hover:text-ink")}>
                   {s.short}
                 </span>
               </button>

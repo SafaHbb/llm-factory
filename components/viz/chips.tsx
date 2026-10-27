@@ -3,12 +3,13 @@
 import { motion } from "framer-motion";
 import type { Token, TokenKind } from "@/lib/pipeline";
 import { cn } from "@/lib/cn";
-import { MORPH } from "@/lib/motion";
+import { COLORS, HARD, MORPH } from "@/lib/motion";
 
+/** Whole words white, word pieces pink, punctuation sun. */
 export const KIND_STYLE: Record<TokenKind, string> = {
-  word: "bg-white border-line",
-  subword: "bg-accent-soft border-accent-line",
-  punct: "bg-stone-100 border-stone-300 border-dashed",
+  word: "bg-white border-ink",
+  subword: "bg-pink border-ink",
+  punct: "bg-sun border-ink",
 };
 
 /** Compact token used in the context row of the prediction and generation stages. */
@@ -17,10 +18,10 @@ export function ContextChip({ token }: { token: Token }) {
     <motion.div
       layoutId={`tok-${token.index}`}
       transition={MORPH}
-      style={{ borderRadius: 10 }}
-      className={cn("border px-2.5 py-1.5", KIND_STYLE[token.kind])}
+      style={{ borderRadius: 12 }}
+      className={cn("border-[2.5px] px-2.5 py-1.5 shadow-hard-md", KIND_STYLE[token.kind])}
     >
-      <motion.span layout="position" transition={MORPH} className="block whitespace-nowrap text-sm font-medium leading-none text-ink">
+      <motion.span layout="position" transition={MORPH} className="block whitespace-nowrap text-sm font-bold leading-none text-ink">
         {token.text}
       </motion.span>
     </motion.div>
@@ -38,15 +39,13 @@ export function GenChip({ text, k, fresh = false, latest = true }: { text: strin
         opacity: 1,
         scale: 1,
         y: 0,
-        backgroundColor: latest ? "#D4622A" : "#FBEDE4",
-        borderColor: latest ? "#D4622A" : "#F0C7B0",
-        color: latest ? "#FFFFFF" : "#B54E1C",
-        boxShadow: latest ? "0 6px 16px -8px rgba(212,98,42,0.8)" : "0 0px 0px 0px rgba(212,98,42,0)",
+        backgroundColor: latest ? COLORS.lilac : COLORS.lilacSoft,
+        boxShadow: latest ? HARD.base : HARD.md,
       }}
-      style={{ borderRadius: 10 }}
-      className="border px-2.5 py-1.5"
+      style={{ borderRadius: 12 }}
+      className="border-[2.5px] border-ink px-2.5 py-1.5 text-ink"
     >
-      <motion.span layout="position" transition={MORPH} className="block whitespace-nowrap text-sm font-medium leading-none">
+      <motion.span layout="position" transition={MORPH} className="block whitespace-nowrap text-sm font-bold leading-none">
         {text}
       </motion.span>
     </motion.div>

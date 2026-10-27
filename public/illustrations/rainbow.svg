@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 190" fill="none" stroke-linecap="round">
+<g transform="translate(8 8)" stroke="#1A1A1A"><path d="M30.0 170.0 A120 120 0 0 1 270.0 170.0" stroke-width="27"/><path d="M56.0 170.0 A94 94 0 0 1 244.0 170.0" stroke-width="27"/><path d="M82.0 170.0 A68 68 0 0 1 218.0 170.0" stroke-width="27"/><path d="M108.0 170.0 A42 42 0 0 1 192.0 170.0" stroke-width="27"/></g>
+<path d="M30.0 170.0 A120 120 0 0 1 270.0 170.0" stroke="#1A1A1A" stroke-width="27"/>
+<path d="M30.0 170.0 A120 120 0 0 1 270.0 170.0" stroke="#F27B5B" stroke-width="17"/>
+<path d="M30.0 170.0 A120 120 0 0 1 270.0 170.0" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="3" transform="translate(-2 -2)"/>
+<path d="M56.0 170.0 A94 94 0 0 1 244.0 170.0" stroke="#1A1A1A" stroke-width="27"/>
+<path d="M56.0 170.0 A94 94 0 0 1 244.0 170.0" stroke="#FFD84D" stroke-width="17"/>
+<path d="M56.0 170.0 A94 94 0 0 1 244.0 170.0" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="3" transform="translate(-2 -2)"/>
+<path d="M82.0 170.0 A68 68 0 0 1 218.0 170.0" stroke="#1A1A1A" stroke-width="27"/>
+<path d="M82.0 170.0 A68 68 0 0 1 218.0 170.0" stroke="#9EE493" stroke-width="17"/>
+<path d="M82.0 170.0 A68 68 0 0 1 218.0 170.0" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="3" transform="translate(-2 -2)"/>
+<path d="M108.0 170.0 A42 42 0 0 1 192.0 170.0" stroke="#1A1A1A" stroke-width="27"/>
+<path d="M108.0 170.0 A42 42 0 0 1 192.0 170.0" stroke="#F7A8D8" stroke-width="17"/>
+<path d="M108.0 170.0 A42 42 0 0 1 192.0 170.0" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="3" transform="translate(-2 -2)"/>
+</svg>

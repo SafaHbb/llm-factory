@@ -6,7 +6,7 @@ import { buildPipeline, DEFAULT_TEXT, withGeneration, type Pipeline, type RawSte
 import { STAGES, stageDuration } from "@/lib/stages";
 import { cn } from "@/lib/cn";
 import { EASE } from "@/lib/motion";
-import { LogoMark } from "./icons";
+import { Deco, Sticker, type StickerColor } from "./Deco";
 import { InputBar } from "./InputBar";
 import { StageRail } from "./StageRail";
 import { Controls } from "./Controls";
@@ -120,94 +120,136 @@ export default function LLMFactory() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="mx-auto flex h-[100dvh] min-h-[660px] max-w-6xl flex-col gap-4 px-4 py-4 sm:px-6 lg:px-8">
-        {/* top bar */}
-        <header className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex items-center gap-3">
-            <LogoMark />
-            <span className="text-[15px] font-semibold tracking-tight text-ink">LLM Factory</span>
-            <ModelPill status={model} />
+      <div className="relative flex h-[100dvh] min-h-[660px] flex-col overflow-hidden bg-cream">
+        <div className="h-2 shrink-0 border-b-[3px] border-ink bg-pink" />
+
+        {/* header band */}
+        <header className="relative shrink-0 border-b-[3px] border-ink bg-sky">
+          <div className="relative mx-auto flex max-w-[1100px] flex-col gap-4 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:gap-8 lg:py-[clamp(10px,2vh,26px)]">
+            <div className="relative shrink-0">
+              <Deco name="daisy-pink" width={42} tilt={10} idle="sway" duration={7} className="-top-[18px] left-[150px] z-10 hidden sm:block lg:left-[clamp(130px,19vh,175px)]" />
+              <h1 className="display-title relative text-[44px] leading-[0.9] tracking-[1px] lg:text-[clamp(46px,7.6vh,76px)]">
+                <span className="text-sun">LLM</span> <span className="text-white">Factory</span>
+              </h1>
+              <div className="mt-3 flex items-center gap-3 lg:mt-[clamp(8px,1.4vh,16px)]">
+                <Sticker color="pink" tilt={-3}>watch a sentence think</Sticker>
+                <ModelPill status={model} />
+              </div>
+            </div>
+
+            <InputBar value={draft} onChange={setDraft} onRun={run} />
+
+            {/* header illustrations */}
+            <div className="relative hidden h-[clamp(96px,14vh,130px)] w-[270px] shrink-0 xl:block">
+              <Deco name="rainbow" width={170} idle="float" duration={7} className="right-[18px] top-[calc(50%-54px)]" />
+              <Deco name="smiley-laugh" width={62} tilt={-12} idle="sway" duration={5} className="-top-1 left-0" />
+              <Deco name="sparkle" width={30} idle="sway" duration={4} delay={0.6} className="bottom-0 left-[16px]" />
+              <Deco name="star" width={22} idle="spin" duration={8} className="-right-2 bottom-1" />
+            </div>
           </div>
-          <InputBar value={draft} onChange={setDraft} onRun={run} />
         </header>
 
-        <StageRail stage={stage} onSelect={go} />
+        {/* page */}
+        <div className="relative mx-auto flex min-h-0 w-full max-w-[1100px] flex-1 flex-col gap-2 px-4 pb-5 pt-2 sm:px-6 lg:gap-[clamp(8px,1.4vh,16px)] lg:pt-[clamp(8px,1.4vh,16px)]">
+          <StageRail stage={stage} onSelect={go} />
 
-        {/* canvas */}
-        <section className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-[28px] border border-line bg-panel shadow-[0_1px_2px_rgba(28,27,25,0.04),0_40px_80px_-48px_rgba(28,27,25,0.35)]">
-          <div className="flex items-center gap-3 px-5 pt-4 sm:px-6">
-            <span className={cn("h-2 w-2 shrink-0 rounded-full transition-colors", moving ? "animate-pulse bg-accent" : "bg-emerald-500/70")} />
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={stage}
-                initial={{ opacity: 0, y: 4 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -4 }}
-                transition={{ duration: 0.25, ease: EASE }}
-                className="text-sm"
-              >
-                <span className="font-medium text-ink">{STAGES[stage].title}</span>
-                <span className="text-muted"> · {STAGES[stage].line}</span>
-              </motion.p>
-            </AnimatePresence>
-          </div>
-
-          <div className="canvas-grid relative flex min-h-0 flex-1 items-center justify-center px-4 py-6 sm:px-8">
-            <Visualization key={runId} pipeline={pipeline} stage={stage} focus={focus} onFocus={setFocus} />
-          </div>
-
-          <div className="flex items-center gap-2 px-5 pb-3 sm:px-6">
-            <Roller moving={moving} />
-            <div className="relative h-2 flex-1 overflow-hidden rounded-full bg-line/70">
-              <div className={cn("belt absolute inset-0", moving && "belt-moving")} />
+          {/* canvas */}
+          <section className="relative flex min-h-0 flex-1 flex-col rounded-[24px] border-[3px] border-ink bg-white shadow-hard-lg">
+            <Deco name="dot-coral" width={26} idle="none" className="-right-[13px] -top-[13px] z-30" />
+            <div className="hidden xl:block">
+              <Deco name="daisy-sun" width={56} tilt={-15} idle="sway" duration={6} className="-right-[84px] top-[30%]" />
+              <Deco name="loop-arrow" width={104} flip tilt={-8} idle="float" duration={5} className="-right-[112px] bottom-[70px]" />
+              <Deco name="daisy-mint" width={50} idle="sway" duration={7} delay={0.4} className="-left-[78px] bottom-0" />
             </div>
-            <Roller moving={moving} />
-          </div>
 
-          <Controls
-            stage={stage}
-            total={STAGES.length}
-            playing={playing}
-            duration={duration}
-            onPrev={() => go(stage - 1)}
-            onNext={() => go(stage + 1)}
-            onToggle={toggle}
-            onReplay={replay}
-          />
-        </section>
+            <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-[21px]">
+              <div className="flex items-center gap-3 px-5 pt-3 sm:px-6">
+                <span
+                  className={cn(
+                    "h-3 w-3 shrink-0 rounded-full border-2 border-ink transition-colors",
+                    moving ? "animate-pulse bg-coral" : "bg-mint",
+                  )}
+                />
+                <AnimatePresence mode="wait">
+                  <motion.p
+                    key={stage}
+                    initial={{ opacity: 0, y: 4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -4 }}
+                    transition={{ duration: 0.25, ease: EASE }}
+                    className="flex min-w-0 items-center gap-3 text-[15px] leading-snug text-ink"
+                  >
+                    <Sticker color={STICKER_CYCLE[stage % STICKER_CYCLE.length]} tilt={stage % 2 ? 2 : -2} className="shrink-0">
+                      {String(stage + 1).padStart(2, "0")} · {STAGES[stage].title.toLowerCase()}
+                    </Sticker>
+                    <span className="min-w-0">{STAGES[stage].line}</span>
+                  </motion.p>
+                </AnimatePresence>
+              </div>
+
+              <div className="canvas-grid relative flex min-h-0 flex-1 items-center justify-center px-4 py-3 sm:px-8">
+                <Visualization key={runId} pipeline={pipeline} stage={stage} focus={focus} onFocus={setFocus} />
+              </div>
+
+              <div className="flex items-center gap-2 px-5 pb-2 sm:px-6">
+                <Roller moving={moving} />
+                <div className="relative h-3 flex-1 overflow-hidden rounded-full border-2 border-ink bg-sun">
+                  <div className={cn("belt absolute inset-0 opacity-80", moving && "belt-moving")} />
+                </div>
+                <Roller moving={moving} />
+              </div>
+
+              <Controls
+                stage={stage}
+                total={STAGES.length}
+                playing={playing}
+                duration={duration}
+                onPrev={() => go(stage - 1)}
+                onNext={() => go(stage + 1)}
+                onToggle={toggle}
+                onReplay={replay}
+              />
+            </div>
+          </section>
+        </div>
+
+        <Deco name="burst" width={92} tilt={8} idle="spin" duration={8} className="-bottom-[26px] right-3 hidden xl:block" />
       </div>
     </MotionConfig>
   );
 }
+
+const STICKER_CYCLE: StickerColor[] = ["sky", "sun", "pink", "lilac", "mint", "coral"];
 
 function ModelPill({ status }: { status: ModelStatus }) {
   const { state, model, real, error } = status;
   const name = model?.replace(/:latest$/, "") ?? "model";
   const label = state === "offline" ? "Ollama offline" : "Ollama";
   return (
-    <span
+    <Sticker
+      color={state === "ready" ? "mint" : state === "offline" ? "white" : "sun"}
+      tilt={2}
       title={state === "offline" ? error : `${name}${state === "thinking" ? " is writing…" : real === false ? " · simulated scores" : ""}`}
-      className="flex items-center gap-1.5 rounded-full border border-line bg-white px-2.5 py-1 text-[11px] text-muted"
     >
       <span
         className={cn(
-          "h-1.5 w-1.5 rounded-full",
-          state === "ready" ? "bg-emerald-500" : state === "offline" ? "bg-stone-400" : "animate-pulse bg-accent",
+          "h-2 w-2 rounded-full border-[1.5px] border-ink",
+          state === "ready" ? "bg-white" : state === "offline" ? "bg-ink" : "animate-pulse bg-coral",
         )}
       />
       {label}
-    </span>
+    </Sticker>
   );
 }
 
 function Roller({ moving }: { moving: boolean }) {
   return (
     <motion.span
-      className="grid h-4 w-4 place-items-center rounded-full border border-ink/20 bg-white"
+      className="grid h-4 w-4 shrink-0 place-items-center rounded-full border-2 border-ink bg-white"
       animate={moving ? { rotate: 360 } : { rotate: 0 }}
       transition={moving ? { duration: 0.8, repeat: Infinity, ease: "linear" } : { duration: 0.3 }}
     >
-      <span className="h-[6px] w-px bg-ink/40" />
+      <span className="h-[6px] w-[2px] bg-ink" />
     </motion.span>
   );
 }

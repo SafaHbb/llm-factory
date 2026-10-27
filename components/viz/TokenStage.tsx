@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useRef } from "react";
 import type { Pipeline, Token } from "@/lib/pipeline";
 import { cn } from "@/lib/cn";
-import { COLORS, MORPH } from "@/lib/motion";
+import { COLORS, HARD, MORPH } from "@/lib/motion";
 import { CountUp } from "./CountUp";
 import { AttentionArcs } from "./AttentionArcs";
 import { EmbedMap } from "./EmbedMap";
@@ -24,32 +24,32 @@ export function TokenStage(props: Props) {
 
 const SHELL_ON = {
   backgroundColor: "rgba(255,255,255,1)",
-  borderColor: "rgba(227,224,216,1)",
-  boxShadow: "0 1px 2px rgba(28,27,25,0.04), 0 24px 48px -24px rgba(28,27,25,0.22)",
+  borderColor: "rgba(26,26,26,1)",
+  boxShadow: HARD.lg,
 };
 const SHELL_OFF = {
   backgroundColor: "rgba(255,255,255,0)",
-  borderColor: "rgba(227,224,216,0)",
-  boxShadow: "0 0px 0px rgba(28,27,25,0), 0 0px 0px 0px rgba(28,27,25,0)",
+  borderColor: "rgba(26,26,26,0)",
+  boxShadow: HARD.none,
 };
 
 function groupLook(stage: number) {
   if (stage === 1)
     return {
       backgroundColor: "rgba(255,255,255,1)",
-      borderColor: "rgba(227,224,216,1)",
-      boxShadow: "0 1px 2px rgba(28,27,25,0.04), 0 10px 24px -14px rgba(28,27,25,0.25)",
+      borderColor: "rgba(26,26,26,1)",
+      boxShadow: HARD.base,
     };
   if (stage === 2)
     return {
       backgroundColor: "rgba(255,255,255,0)",
-      borderColor: "rgba(28,27,25,0.16)",
-      boxShadow: "0 0px 0px rgba(28,27,25,0), 0 0px 0px 0px rgba(28,27,25,0)",
+      borderColor: "rgba(26,26,26,0.45)",
+      boxShadow: HARD.none,
     };
   return {
     backgroundColor: "rgba(255,255,255,0)",
-    borderColor: "rgba(28,27,25,0)",
-    boxShadow: "0 0px 0px rgba(28,27,25,0), 0 0px 0px 0px rgba(28,27,25,0)",
+    borderColor: "rgba(26,26,26,0)",
+    boxShadow: HARD.none,
   };
 }
 
@@ -77,7 +77,7 @@ function TokenRow({ pipeline, stage, focus, onFocus }: Props) {
         ref={shellRef}
         transition={MORPH}
         style={{ borderRadius: 24 }}
-        className={cn("relative z-10 max-w-full border", stage === 0 ? "px-8 py-8 sm:px-12 sm:py-10" : "p-0")}
+        className={cn("relative z-10 max-w-full border-[3px]", stage === 0 ? "px-8 py-8 sm:px-12 sm:py-10" : "p-0")}
         animate={stage === 0 ? SHELL_ON : SHELL_OFF}
       >
         <div className={cn("flex flex-wrap items-center justify-center", rowGap)}>
@@ -89,7 +89,7 @@ function TokenRow({ pipeline, stage, focus, onFocus }: Props) {
               style={{ borderRadius: stage === 2 ? 14 : 16 }}
               animate={groupLook(stage)}
               className={cn(
-                "flex items-center border",
+                "flex items-center border-[2.5px]",
                 stage === 1 && "px-5 py-3",
                 stage === 2 && "gap-1.5 border-dashed p-1.5",
                 stage >= 3 && "gap-1.5",
@@ -100,7 +100,7 @@ function TokenRow({ pipeline, stage, focus, onFocus }: Props) {
                   layoutId={`tok-${w.tokens[0]}`}
                   transition={MORPH}
                   className={cn(
-                    "inline-block whitespace-nowrap font-medium leading-none tracking-tight text-ink",
+                    "inline-block whitespace-nowrap font-bold leading-none tracking-tight text-ink",
                     stage === 0 ? "text-3xl sm:text-[40px]" : "text-2xl sm:text-[28px]",
                   )}
                 >
@@ -139,7 +139,7 @@ function TokenRow({ pipeline, stage, focus, onFocus }: Props) {
         {stage === 0 && (
           <motion.div
             key="chars"
-            className="mt-8 flex max-w-full flex-wrap justify-center gap-[3px]"
+            className="mt-8 flex max-w-full flex-wrap justify-center gap-1"
             exit={{ opacity: 0, y: 6, transition: { duration: 0.25 } }}
           >
             {pipeline.input.split("").map((ch, i) => (
@@ -148,7 +148,7 @@ function TokenRow({ pipeline, stage, focus, onFocus }: Props) {
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 + i * 0.018, duration: 0.3 }}
-                className="grid h-6 w-[18px] place-items-center rounded-[5px] border border-line bg-white font-mono text-[10px] text-muted"
+                className="grid h-6 w-[18px] place-items-center rounded-[5px] border-2 border-ink bg-white font-mono text-[10px] text-ink shadow-hard-sm"
               >
                 {ch === " " ? "·" : ch}
               </motion.span>
@@ -183,19 +183,20 @@ function TokenCard({ token: t, stage, firstInWord, focus, onFocus, refCb }: Card
       animate={{
         opacity: future ? 0.3 : 1,
         x: 0,
+        y: isFocus ? -3 : 0,
         boxShadow: isFocus
-          ? `0 0 0 2px ${COLORS.steel}, 0 12px 28px -8px rgba(58,107,140,0.55)`
-          : "0 0 0 0px rgba(58,107,140,0), 0 1px 2px -1px rgba(28,27,25,0.08)",
+          ? `0 0 0 3px ${COLORS.coral}, 6px 6px 0 3px ${COLORS.ink}`
+          : `0 0 0 0px rgba(242,123,91,0), 4px 4px 0 0px ${COLORS.ink}`,
       }}
       onClick={isAttn ? () => onFocus(t.index) : undefined}
       style={{ borderRadius: 12 }}
       className={cn(
-        "relative flex flex-col items-center border px-3.5 py-2",
+        "relative flex flex-col items-center border-[2.5px] px-3.5 py-2",
         KIND_STYLE[t.kind],
-        isAttn && "cursor-pointer hover:border-steel-line",
+        isAttn && "cursor-pointer",
       )}
     >
-      <motion.span layout="position" transition={MORPH} className="whitespace-nowrap text-lg font-medium leading-none text-ink">
+      <motion.span layout="position" transition={MORPH} className="whitespace-nowrap text-lg font-bold leading-none text-ink">
         {t.text}
       </motion.span>
 
@@ -204,7 +205,7 @@ function TokenCard({ token: t, stage, firstInWord, focus, onFocus, refCb }: Card
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35 + t.index * 0.06, duration: 0.4 }}
-          className="mt-2 border-t border-line pt-1.5 font-mono text-xs font-medium text-accent"
+          className="mt-2 border-t-2 border-dashed border-ink pt-1 font-mono text-xs text-ink"
         >
           <CountUp to={t.id} delay={0.4 + t.index * 0.06} />
         </motion.span>
