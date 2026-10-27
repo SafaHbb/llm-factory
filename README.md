@@ -30,6 +30,3 @@ ollama pull llama3.2
 To use another model, add `OLLAMA_MODEL=your-model` to `.env.local`.
 Without Ollama, the app falls back to simulated text.
 
-## Stack
-
-Next.js, React, TypeScript, Tailwind CSS, Framer Motion.
