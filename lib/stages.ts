@@ -1,0 +1,29 @@
+export interface StageInfo {
+  short: string;
+  title: string;
+  line: string;
+}
+
+export const STAGES: StageInfo[] = [
+  { short: "Input", title: "Raw input", line: "To the model, this is just a string of characters." },
+  { short: "Words", title: "Words", line: "First, the text is split at the spaces." },
+  { short: "Tokens", title: "Tokens", line: "Words are cut into pieces the model knows. Tinted ones are parts of a word." },
+  { short: "IDs", title: "Token IDs", line: "Each token is swapped for its number." },
+  { short: "Embed", title: "Embeddings", line: "Each token becomes a point on a map of meaning. Similar tokens sit close." },
+  { short: "Position", title: "Position", line: "Tokens get an order number, so the word order is not lost." },
+  { short: "Attention", title: "Attention", line: "Each token looks back at earlier ones. Thicker line, more focus. Click a token." },
+  { short: "Predict", title: "Prediction", line: "The model reads all the tokens, scores every possible next token, and the best one fills the blank." },
+  { short: "Generate", title: "Generation", line: "The new token joins the text, and the whole text goes back in to predict the next one." },
+  { short: "Output", title: "Output", line: "Tokens are joined back into text." },
+];
+
+export const GEN_STEP_MS = 1100;
+
+/** Time per generated token; long continuations play faster so the stage stays under ~14s. */
+export const genStepMs = (count: number) => Math.round(Math.max(600, Math.min(GEN_STEP_MS, 13000 / Math.max(1, count))));
+
+export function stageDuration(stage: number, genCount: number, tokenCount = 8): number {
+  const base = [3000, 3000, 3600, 3400, 4200, 1600 + tokenCount * 250 + 1400, 5600, 5800, 0, 5000];
+  if (stage === 8) return 1000 + genCount * genStepMs(genCount) + 1600;
+  return base[stage] ?? 4000;
+}
