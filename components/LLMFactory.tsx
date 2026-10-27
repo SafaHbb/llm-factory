@@ -125,19 +125,20 @@ export default function LLMFactory() {
 
         {/* header band */}
         <header className="relative shrink-0 border-b-[3px] border-ink bg-sky">
-          <div className="relative mx-auto flex max-w-[1100px] flex-col gap-4 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:gap-8 lg:py-[clamp(10px,2vh,26px)]">
-            <div className="relative shrink-0">
+          <div className="relative mx-auto flex max-w-[1100px] items-center gap-8 px-4 py-4 sm:px-6 lg:py-[clamp(10px,1.8vh,24px)]">
+            <div className="relative min-w-0 flex-1">
               <Deco name="daisy-pink" width={42} tilt={10} idle="sway" duration={7} className="-top-[18px] left-[150px] z-10 hidden sm:block lg:left-[clamp(130px,19vh,175px)]" />
-              <h1 className="display-title relative text-[44px] leading-[0.9] tracking-[1px] lg:text-[clamp(46px,7.6vh,76px)]">
-                <span className="text-sun">LLM</span> <span className="text-white">Factory</span>
+              <h1 className="display-title relative text-[40px] leading-[0.9] tracking-[1px] [word-spacing:0.1em] lg:text-[clamp(44px,7vh,70px)]">
+                <span className="text-pink">Safa&apos;s</span> <span className="text-sun">LLM</span> <span className="text-white">Factory</span>
               </h1>
-              <div className="mt-3 flex items-center gap-3 lg:mt-[clamp(8px,1.4vh,16px)]">
-                <Sticker color="pink" tilt={-3}>watch a sentence think</Sticker>
-                <ModelPill status={model} />
+              <div className="mt-3 flex flex-col gap-3 lg:mt-[clamp(8px,1.4vh,14px)] lg:flex-row lg:items-center lg:gap-5">
+                <div className="flex shrink-0 items-center gap-3">
+                  <Sticker color="pink" tilt={-3}>watch a sentence think</Sticker>
+                  <ModelPill status={model} />
+                </div>
+                <InputBar value={draft} onChange={setDraft} onRun={run} />
               </div>
             </div>
-
-            <InputBar value={draft} onChange={setDraft} onRun={run} />
 
             {/* header illustrations */}
             <div className="relative hidden h-[clamp(96px,14vh,130px)] w-[270px] shrink-0 xl:block">
@@ -158,7 +159,7 @@ export default function LLMFactory() {
             <Deco name="dot-coral" width={26} idle="none" className="-right-[13px] -top-[13px] z-30" />
             <div className="hidden xl:block">
               <Deco name="daisy-sun" width={56} tilt={-15} idle="sway" duration={6} className="-right-[84px] top-[30%]" />
-              <Deco name="loop-arrow" width={104} flip tilt={-8} idle="float" duration={5} className="-right-[112px] bottom-[70px]" />
+              <Deco name="loop-arrow" width={104} flip tilt={-8} idle="float" duration={5} className="-right-[112px] bottom-[110px]" />
               <Deco name="daisy-mint" width={50} idle="sway" duration={7} delay={0.4} className="-left-[78px] bottom-0" />
             </div>
 
@@ -213,7 +214,7 @@ export default function LLMFactory() {
           </section>
         </div>
 
-        <Deco name="burst" width={92} tilt={8} idle="spin" duration={8} className="-bottom-[26px] right-3 hidden xl:block" />
+        <Deco name="burst" width={92} tilt={8} idle="spin" duration={8} className="bottom-3 right-3 hidden xl:block" />
       </div>
     </MotionConfig>
   );

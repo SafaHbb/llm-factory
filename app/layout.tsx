@@ -7,7 +7,7 @@ const body = Lato({ weight: ["400", "700"], subsets: ["latin"], variable: "--fon
 const mono = Space_Mono({ weight: ["400", "700"], subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
 export const metadata: Metadata = {
-  title: "LLM Factory",
+  title: "Safa's LLM Factory",
   description: "A visual tour of how a sentence moves through a language model.",
 };
 

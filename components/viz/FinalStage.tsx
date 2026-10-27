@@ -17,7 +17,7 @@ export function FinalStage({ pipeline }: { pipeline: Pipeline }) {
       className="relative w-full max-w-3xl rounded-[24px] border-[3px] px-8 py-9 sm:px-12 sm:py-11"
     >
       {/* celebration */}
-      <Deco name="smiley-wavy" width={64} tilt={-10} pop delay={0.9} idle="sway" duration={5} className="-left-7 -top-8 z-10" />
+      <Deco name="smiley-wavy" width={104} tilt={-10} pop delay={0.9} idle="sway" duration={5} className="-left-12 -top-14 z-10" />
       <Deco name="daisy-sun" width={46} tilt={12} pop delay={1.05} idle="sway" duration={6} className="-bottom-6 -right-5 z-10" />
       <Deco name="sparkle" width={26} pop delay={1.2} idle="float" duration={4} className="-right-3 -top-4 z-10" />
       <Deco name="sparkle" width={18} tilt={15} pop delay={1.32} idle="float" duration={5} className="right-8 -top-6 z-10" />
